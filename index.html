@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设计师作品集 | Designer Portfolio</title>
+    <meta name="description" content="专注于品牌视觉设计、UI/UX设计与创意插画的设计师个人作品集">
+    <meta name="keywords" content="设计,作品集,UI设计,视觉设计,插画,品牌设计">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="设计师作品集">
+    <meta property="og:description" content="专注于品牌视觉设计、UI/UX设计与创意插画">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ==================== Navigation ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">Portfolio</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#gallery" class="nav-link">作品</a></li>
+                <li><a href="#video" class="nav-link">视频</a></li>
+                <li><a href="#about" class="nav-link">关于</a></li>
+                <li><a href="#contact" class="nav-link">联系</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== Hero ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">创意设计师</p>
+            <h1 class="hero-title">用设计讲述<br>每一个故事</h1>
+            <p class="hero-desc">专注于品牌视觉 · UI/UX · 创意插画</p>
+            <div class="hero-actions">
+                <a href="#gallery" class="btn btn-primary">查看作品</a>
+                <a href="#contact" class="btn btn-outline">联系我</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>向下滚动</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ==================== Gallery ==================== -->
+    <section class="gallery section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">作品集</span>
+                <h2 class="section-title">精选作品</h2>
+                <p class="section-desc">每一件作品都凝聚了对设计的热爱与思考</p>
+            </div>
+
+            <!-- Filter -->
+            <div class="filter-bar" id="filterBar">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="brand">品牌设计</button>
+                <button class="filter-btn" data-filter="ui">UI/UX</button>
+                <button class="filter-btn" data-filter="illustration">插画</button>
+                <button class="filter-btn" data-filter="poster">海报</button>
+            </div>
+
+            <!-- Grid -->
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- items injected by JS -->
+            </div>
+
+            <div class="gallery-more">
+                <button class="btn btn-outline" id="loadMoreBtn">加载更多</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Lightbox ==================== -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImg">
+            <div class="lightbox-info" id="lightboxInfo">
+                <span class="lightbox-title"></span>
+                <span class="lightbox-counter"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== Bilibili Videos ==================== -->
+    <section class="video-section section" id="video">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">视频</span>
+                <h2 class="section-title">创作记录</h2>
+                <p class="section-desc">用镜头记录设计背后的故事与灵感</p>
+            </div>
+
+            <div class="video-grid" id="videoGrid">
+                <!-- items injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== About ==================== -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">关于我</span>
+                <h2 class="section-title">用设计连接世界</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-avatar">
+                    <img src="https://picsum.photos/id/64/400/400" alt="头像">
+                </div>
+                <div class="about-text">
+                    <h3>你好，我是设计师</h3>
+                    <p>
+                        拥有 5 年视觉设计经验，专注于品牌识别、UI/UX 界面设计以及创意插画。
+                        我相信好的设计不仅关乎美感，更在于解决问题与传达情感。
+                    </p>
+                    <p>
+                        曾服务于多家互联网公司与创意工作室，参与过从 0 到 1 的品牌建设、
+                        百万级用户量产品的界面设计，以及多个获得国内外奖项的插画项目。
+                    </p>
+                    <div class="about-skills">
+                        <span class="skill-tag">品牌设计</span>
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">插画</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">Illustrator</span>
+                        <span class="skill-tag">After Effects</span>
+                        <span class="skill-tag">Blender</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Contact ==================== -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">联系</span>
+                <h2 class="section-title">一起合作</h2>
+                <p class="section-desc">无论是项目合作还是创意交流，欢迎随时联系</p>
+            </div>
+
+            <div class="contact-content">
+                <a href="mailto:hello@example.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>邮箱</h4>
+                    <p>hello@example.com</p>
+                </a>
+                <a href="#" class="contact-card" target="_blank">
+                    <i class="fab fa-weibo"></i>
+                    <h4>微博</h4>
+                    <p>@设计师</p>
+                </a>
+                <a href="#" class="contact-card" target="_blank">
+                    <i class="fab fa-behance"></i>
+                    <h4>Behance</h4>
+                    <p>behance.net/designer</p>
+                </a>
+                <a href="#" class="contact-card" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <h4>GitHub</h4>
+                    <p>github.com/designer</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Footer ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Portfolio. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#hero">首页</a>
+                <a href="#gallery">作品</a>
+                <a href="#video">视频</a>
+                <a href="#about">关于</a>
+                <a href="#contact">联系</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
