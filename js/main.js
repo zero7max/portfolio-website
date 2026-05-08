@@ -119,7 +119,7 @@ let filteredData = [...galleryData];
    ============================================ */
 const videoData = [
     {
-        bvid: 'BV1GJ411x7',   // ← 替换为你的B站视频ID
+        bvid: 'BV1n1o1BBE13',   // ← 替换为你的B站视频ID
         title: '设计过程全记录 — 品牌视觉系统从0到1',
         desc: '记录了一个完整品牌项目的设计思考与执行过程'
     },
