@@ -186,6 +186,55 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 /* ============================================
+   Reveal 作品/视频 sections on nav click
+   ============================================ */
+const hiddenSections = document.querySelectorAll('.section-hidden');
+
+function revealWorks() {
+    let anyRevealed = false;
+    hiddenSections.forEach(el => {
+        if (!el.classList.contains('revealed')) {
+            el.classList.add('revealed');
+            anyRevealed = true;
+        }
+    });
+    // Render on first reveal
+    if (anyRevealed) {
+        renderGallery(1);
+        renderVideos();
+        initScrollReveal();
+    }
+}
+
+document.getElementById('navWorks').addEventListener('click', e => {
+    e.preventDefault();
+    revealWorks();
+    setTimeout(() => {
+        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+});
+
+// Also handle footer "作品" link and any other link to #gallery
+document.querySelectorAll('a[href="#gallery"]').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        revealWorks();
+        setTimeout(() => {
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+    });
+});
+
+// Hero CTA "查看作品" also triggers reveal
+document.querySelector('.btn-primary')?.addEventListener('click', e => {
+    e.preventDefault();
+    revealWorks();
+    setTimeout(() => {
+        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+});
+
+/* ============================================
    Gallery — Render & Filter
    ============================================ */
 function getVisibleItems() {
@@ -298,26 +347,37 @@ document.addEventListener('keydown', e => {
 });
 
 /* ============================================
-   Video — Render Bilibili Mobile Links
+   Video — Render Bilibili iframe embed
    ============================================ */
 function renderVideos() {
     videoData.forEach(video => {
         const div = document.createElement('div');
         div.className = 'video-item';
         div.innerHTML = `
-            <div class="video-cover">
+            <div class="video-cover" id="videoCover-${video.bvid}">
                 <img class="video-cover-img" src="${video.cover}" alt="${video.title}" loading="lazy">
                 <div class="video-play-btn">
                     <i class="fas fa-play"></i>
                 </div>
+            </div>
+            <div class="video-iframe-wrapper" style="display:none">
+                <iframe
+                    src="https://player.bilibili.com/player.html?bvid=${video.bvid}&autoplay=1&high_quality=1"
+                    allowfullscreen="true"
+                    allow="autoplay; fullscreen"
+                ></iframe>
             </div>
             <div class="video-info">
                 <h4>${video.title}</h4>
                 <p>${video.desc}</p>
             </div>
         `;
-        div.addEventListener('click', () => {
-            window.open(`https://m.bilibili.com/video/${video.bvid}`, '_blank');
+        const cover = div.querySelector('.video-cover');
+        const iframeWrap = div.querySelector('.video-iframe-wrapper');
+        cover.addEventListener('click', (e) => {
+            e.stopPropagation();
+            cover.style.display = 'none';
+            iframeWrap.style.display = 'block';
         });
         videoGrid.appendChild(div);
     });
@@ -343,8 +403,5 @@ function initScrollReveal() {
 }
 
 /* ============================================
-   Init
+   Init — Gallery & Video render on first "作品" click
    ============================================ */
-renderGallery(1);
-renderVideos();
-initScrollReveal();
