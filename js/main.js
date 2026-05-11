@@ -119,24 +119,28 @@ let filteredData = [...galleryData];
    ============================================ */
 const videoData = [
     {
-        bvid: 'BV1n1o1BBE13',   // ← 替换为你的B站视频ID
+        bvid: 'BV1n1o1BBE13',
         title: 'AIGC汽车广告 Rimac Nevera',
-        desc: 'Rimac Nevera'
+        desc: 'Rimac Nevera',
+        cover: 'https://picsum.photos/id/30/640/360'
     },
     {
-        bvid: 'BV1GJ411x7',
+        bvid: 'BV1n1o1BBE13',
         title: 'UI设计教程：如何打造高质感界面',
-        desc: '分享界面设计中的细节处理与设计规范'
+        desc: '分享界面设计中的细节处理与设计规范',
+        cover: 'https://picsum.photos/id/45/640/360'
     },
     {
-        bvid: 'BV1GJ411x7',
+        bvid: 'BV1n1o1BBE13',
         title: '插画创作流程 — 从草图到成稿',
-        desc: '展示数字插画的完整绘制流程和技巧'
+        desc: '展示数字插画的完整绘制流程和技巧',
+        cover: 'https://picsum.photos/id/56/640/360'
     },
     {
-        bvid: 'BV1GJ411x7',
+        bvid: 'BV1n1o1BBE13',
         title: '设计工具分享：我的工作流',
-        desc: '分享日常设计工作中使用的工具与效率技巧'
+        desc: '分享日常设计工作中使用的工具与效率技巧',
+        cover: 'https://picsum.photos/id/68/640/360'
     }
 ];
 
@@ -196,7 +200,7 @@ function renderGallery(page = 1, append = false) {
 
     if (!append) galleryGrid.innerHTML = '';
 
-    items.forEach((item, idx) => {
+    items.forEach((item) => {
         const globalIdx = galleryData.findIndex(d => d.id === item.id);
         const extraClass = item.ratio === 'tall' ? ' tall' : item.ratio === 'wide' ? ' wide' : '';
         const div = document.createElement('div');
@@ -211,13 +215,11 @@ function renderGallery(page = 1, append = false) {
         div.addEventListener('click', () => openLightbox(globalIdx));
         galleryGrid.appendChild(div);
 
-        // trigger scroll animation after layout
         requestAnimationFrame(() => {
             requestAnimationFrame(() => div.classList.add('visible'));
         });
     });
 
-    // Show/hide load more
     loadMoreBtn.style.display = end >= filteredData.length ? 'none' : 'inline-flex';
 }
 
@@ -296,25 +298,27 @@ document.addEventListener('keydown', e => {
 });
 
 /* ============================================
-   Video — Render Bilibili Embeds
+   Video — Render Bilibili Mobile Links
    ============================================ */
 function renderVideos() {
     videoData.forEach(video => {
         const div = document.createElement('div');
         div.className = 'video-item';
         div.innerHTML = `
-            <div class="video-wrapper">
-                <iframe
-                    src="https://player.bilibili.com/player.html?bvid=${video.bvid}&autoplay=0"
-                    allowfullscreen
-                    loading="lazy"
-                ></iframe>
+            <div class="video-cover">
+                <img class="video-cover-img" src="${video.cover}" alt="${video.title}" loading="lazy">
+                <div class="video-play-btn">
+                    <i class="fas fa-play"></i>
+                </div>
             </div>
             <div class="video-info">
                 <h4>${video.title}</h4>
                 <p>${video.desc}</p>
             </div>
         `;
+        div.addEventListener('click', () => {
+            window.open(`https://m.bilibili.com/video/${video.bvid}`, '_blank');
+        });
         videoGrid.appendChild(div);
     });
 }
@@ -332,10 +336,9 @@ function initScrollReveal() {
                 }
             });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
     );
 
-    // Observe video items
     document.querySelectorAll('.video-item').forEach(el => observer.observe(el));
 }
 
