@@ -77,6 +77,16 @@ ul{list-style:none}
 .section-title{font-family:var(--fd);font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--text);margin-top:8px}
 .section-desc{font-size:14px;color:var(--text2);max-width:500px;margin:8px auto 0;font-weight:300}
 
+/* ===== Video Grid ===== */
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:60px}
+.video-card{background:var(--bg-alt);border:1px solid var(--border);overflow:hidden;transition:var(--ease)}
+.video-card:hover{border-color:rgba(255,255,255,.15)}
+.video-card .video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+.video-card iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-card .video-info{padding:14px 18px}
+.video-card .video-info h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px}
+.video-card .video-info p{font-size:12px;color:var(--text2);font-weight:300}
+
 /* ===== Project Grid (2x2) ===== */
 .project-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative}
 .project-card{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:opacity .4s ease,transform .4s ease;background:var(--bg-alt)}
@@ -138,6 +148,7 @@ ul{list-style:none}
     .nav-toggle{display:flex}
     .about-inner{grid-template-columns:1fr;text-align:center}
     .about-avatar{max-width:160px;margin:0 auto}
+    .video-grid{grid-template-columns:1fr}
     .project-grid{grid-template-columns:1fr;gap:16px}
     .expand-wrap{padding:70px 16px 40px}
     .expand-close{top:16px;right:16px;width:36px;height:36px;font-size:16px}
@@ -206,6 +217,11 @@ ul{list-style:none}
     <div class="section" style="padding-top:120px">
         <div class="container">
             <div class="section-header">
+                <div class="section-tag">Videos</div>
+                <h2 class="section-title">创作视频</h2>
+            </div>
+            <div class="video-grid" id="worksVideoGrid"></div>
+            <div class="section-header" style="margin-top:60px">
                 <div class="section-tag">Projects</div>
                 <h2 class="section-title">设计项目</h2>
             </div>
@@ -223,6 +239,11 @@ ul{list-style:none}
     <div class="section" style="padding-top:120px">
         <div class="container">
             <div class="section-header">
+                <div class="section-tag">Videos</div>
+                <h2 class="section-title">技术分享</h2>
+            </div>
+            <div class="video-grid" id="techVideoGrid"></div>
+            <div class="section-header" style="margin-top:60px">
                 <div class="section-tag">Projects</div>
                 <h2 class="section-title">技术项目</h2>
             </div>
@@ -246,6 +267,23 @@ ul{list-style:none}
 </footer>
 
 <script>
+/* ================================================
+   Video Data
+   ================================================ */
+const worksVideos = [
+    {bvid:'BV1n1o1BBE13', title:'AIGC汽车广告 Rimac Nevera', desc:'Rimac Nevera 创意视觉'},
+    {bvid:'BV1n1o1BBE13', title:'UI设计教程：打造高质感界面', desc:'界面细节与设计规范'},
+    {bvid:'BV1n1o1BBE13', title:'插画创作流程分享', desc:'从草图到成稿'},
+    {bvid:'BV1n1o1BBE13', title:'设计工具推荐：我的工作流', desc:'效率工具与技巧'}
+];
+
+const techVideos = [
+    {bvid:'BV1n1o1BBE13', title:'如何搭建 React 项目', desc:'从零到一的前端实践'},
+    {bvid:'BV1n1o1BBE13', title:'Python 自动化脚本实战', desc:'提升日常开发效率'},
+    {bvid:'BV1n1o1BBE13', title:'Docker 入门教程', desc:'容器化部署快速上手'},
+    {bvid:'BV1n1o1BBE13', title:'AI 工具使用指南', desc:'ChatGPT 与 AI 绘画实战'}
+];
+
 /* ================================================
    Project Data
    ================================================ */
@@ -278,6 +316,27 @@ const techProjects = [
     {id:11, cover:'https://picsum.photos/id/82/800/450', title:'神经网络可视化', desc:'深度学习模型图解', detail:'使用 D3.js + Three.js 构建的神经网络结构可视化工具，支持交互式探索网络层、权重和激活值。', tags:['AI','可视化','前端'], bvid:'BV1n1o1BBE13', cat:'ai'},
     {id:12, cover:'https://picsum.photos/id/93/800/450', title:'CI/CD 流水线', desc:'自动化部署流程', detail:'基于 GitHub Actions + Docker 构建的前端自动化 CI/CD 流水线，包含 lint、test、build、deploy 全流程。', tags:['DevOps','CI/CD','自动化'], bvid:'BV1n1o1BBE13', cat:'tool'}
 ];
+
+/* ================================================
+   Render Videos
+   ================================================ */
+function renderVideos(containerId, data) {
+    const container = document.getElementById(containerId);
+    data.forEach(v => {
+        const div = document.createElement('div');
+        div.className = 'video-card';
+        div.innerHTML = `
+            <div class="video-wrap">
+                <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=${v.bvid}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+                <h4>${v.title}</h4>
+                <p>${v.desc}</p>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
 
 /* ================================================
    Render Projects
@@ -474,10 +533,12 @@ function switchPage(pageId) {
     // Lazy render
     if (pageId === 'works' && !rendered.works) {
         rendered.works = true;
+        renderVideos('worksVideoGrid', worksVideos);
         renderProjects('worksGrid', 'worksLoadMore', 'worksFilter', worksProjects);
     }
     if (pageId === 'tech' && !rendered.tech) {
         rendered.tech = true;
+        renderVideos('techVideoGrid', techVideos);
         renderProjects('techGrid', 'techLoadMore', 'techFilter', techProjects);
     }
 }
