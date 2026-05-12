@@ -104,7 +104,8 @@ ul{list-style:none}
 .expand-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 .expand-inner{opacity:0;transition:opacity .35s ease;padding:0}
 .expand-inner.show{opacity:1}
-.expand-close{position:fixed;top:20px;right:24px;z-index:10;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.5);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--ease);backdrop-filter:blur(8px)}
+.expand-close{position:fixed;top:20px;right:24px;z-index:10;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.5);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--ease);backdrop-filter:blur(8px);opacity:0;pointer-events:none}
+.expand-close.show{opacity:1;pointer-events:auto}
 .expand-close:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);transform:scale(1.08)}
 /* expanded content layout */
 .expand-wrap{max-width:900px;margin:0 auto;padding:80px 28px 60px}
@@ -354,7 +355,7 @@ function expandCard(cardEl, project, allData) {
     overlay.style.cssText = `top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;`;
 
     overlay.innerHTML = `
-        <button class="expand-close" id="expandClose"><i class="fas fa-chevron-down"></i></button>
+        <button class="expand-close"><i class="fas fa-chevron-down"></i></button>
         <div class="expand-scroll">
             <div class="expand-inner">
                 <div class="expand-wrap">
@@ -381,31 +382,35 @@ function expandCard(cardEl, project, allData) {
     // Disable body scroll
     document.body.style.overflow = 'hidden';
 
-    expandState = { cardEl, overlay, rect, container: cardEl.parentElement };
+    expandState = { cardEl, overlay, container: cardEl.parentElement };
 
     // Animate to full screen
     requestAnimationFrame(() => {
         overlay.classList.add('full');
     });
 
-    // Show inner content after expand
+    // Show inner content + close button after expand
     setTimeout(() => {
         overlay.querySelector('.expand-inner').classList.add('show');
+        overlay.querySelector('.expand-close').classList.add('show');
     }, 350);
 
-    // Close handlers
-    function closeHandler(e) {
-        if (e.target === overlay || e.target.closest('#expandClose')) {
-            closeExpand();
-        }
-    }
-    overlay._closeHandler = closeHandler;
-    overlay.addEventListener('click', closeHandler);
+    // Close on overlay background click
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeExpand();
+    });
+
+    // Close button: direct handler
+    const closeBtn = overlay.querySelector('.expand-close');
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeExpand();
+    });
 
     // ESC to close
-    document.addEventListener('keydown', expandState._escHandler = (e) => {
-        if (e.key === 'Escape') closeExpand();
-    });
+    const escHandler = (e) => { if (e.key === 'Escape') closeExpand(); };
+    document.addEventListener('keydown', escHandler);
+    expandState._escHandler = escHandler;
 }
 
 function closeExpand() {
