@@ -327,7 +327,7 @@ function renderVideos(containerId, data) {
         div.className = 'video-card';
         div.innerHTML = `
             <div class="video-wrap">
-                <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=${v.bvid}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy"></iframe>
+                <iframe src="https://player.bilibili.com/player.html?isOutside=true&bvid=${v.bvid}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy"></iframe>
             </div>
             <div class="video-info">
                 <h4>${v.title}</h4>
@@ -448,7 +448,7 @@ function expandCard(cardEl, project) {
                 <h2 class="exp-title">${project.title}</h2>
                 <p class="exp-desc">${project.detail}</p>
                 <div class="exp-video">
-                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=${project.bvid}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy"></iframe>
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&bvid=${project.bvid}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
