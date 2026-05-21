@@ -7,11 +7,11 @@
 <meta name="description" content="设计师个人作品集">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&family=Noto+Serif+SC:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 /* ===== Reset & Variables ===== */
-:root{--bg:#0a0a0a;--bg-alt:#111;--text:#f0f0f0;--text2:#999;--text3:#666;--border:#2a2a2a;--fd:'Playfair Display',Georgia,serif;--ff:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;--mw:1200px;--nh:72px;--ease:.4s cubic-bezier(.4,0,.2,1)}
+:root{--bg:#0a0a0a;--bg-alt:#111;--text:#f0f0f0;--text2:#999;--text3:#666;--border:#2a2a2a;--fd:'Noto Serif SC','Playfair Display',Georgia,serif;--ff:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;--mw:1200px;--nh:72px;--ease:.4s cubic-bezier(.4,0,.2,1)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:var(--nh)}
 body{font-family:var(--ff);color:var(--text);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
@@ -192,7 +192,7 @@ ul{list-style:none}
     <div class="about">
         <div class="container">
             <div class="about-inner">
-                <div class="about-avatar"><img src="https://picsum.photos/id/64/400/400" alt="avatar"></div>
+                <div class="about-avatar"><img src="images/homepage_avatar.png" alt="avatar"></div>
                 <div class="about-text">
                     <h3>以设计为语言</h3>
                     <p>具备扎实的设计功底与敏锐的艺术审美，熟练掌握 AIGC 工具及 PS/Figma/ 剪映等专业软件，拥有企业采购、项目设计、品牌宣传多维度工作经验，擅长高效执行任务与跨部门协作，学习能力强。</p>
@@ -205,7 +205,7 @@ ul{list-style:none}
             <h2 class="contact-title">联系方式</h2>
             <div class="contact-grid">
                 <a href="mailto:hello@example.com" class="contact-card"><i class="fas fa-envelope"></i><h4>邮箱</h4><p>1021030741@qq.com</p></a>
-                <a href="https://space.bilibili.com" target="_blank" class="contact-card"><i class="fab fa-bilibili"></i><h4>B站</h4><p>@设计师</p></a>
+                <a href="https://space.bilibili.com/489489359" target="_blank" class="contact-card"><i class="fab fa-bilibili"></i><h4>B站</h4><p>@梅甘娜RS_</p></a>
                 <a href="https://github.com/zero7max" target="_blank" class="contact-card"><i class="fab fa-github"></i><h4>GitHub</h4><p>zero7max</p></a>
             </div>
         </div>
@@ -222,8 +222,8 @@ ul{list-style:none}
             </div>
             <div class="video-grid" id="worksVideoGrid"></div>
             <div class="section-header" style="margin-top:60px">
-                <div class="section-tag">Projects</div>
-                <h2 class="section-title">设计项目</h2>
+                <div class="section-tag">3D Modeling</div>
+                <h2 class="section-title">3D建模</h2>
             </div>
             <div class="project-grid" id="worksGrid"></div>
             <div class="project-load-more">
@@ -272,9 +272,7 @@ ul{list-style:none}
    ================================================ */
 const worksVideos = [
     {bvid:'BV1n1o1BBE13', title:'AIGC汽车广告 Rimac Nevera', desc:'Rimac Nevera 创意视觉'},
-    {bvid:'BV1n1o1BBE13', title:'UI设计教程：打造高质感界面', desc:'界面细节与设计规范'},
-    {bvid:'BV1n1o1BBE13', title:'插画创作流程分享', desc:'从草图到成稿'},
-    {bvid:'BV1n1o1BBE13', title:'设计工具推荐：我的工作流', desc:'效率工具与技巧'}
+    {bvid:'BV1zeQ4BvEAT', title:'AIGC东方美学', desc:'Seedance2.0+Wan2.2'}
 ];
 
 const techVideos = [
