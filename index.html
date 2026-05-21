@@ -101,7 +101,7 @@ ul{list-style:none}
 .project-load-more{text-align:center;margin-top:40px}
 
 /* ===== Filter Tags ===== */
-.project-filter{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:48px}
+.project-filter{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:40px}
 .project-filter .tag-btn{padding:6px 16px;font-size:11px;font-weight:400;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;transition:var(--ease);font-family:var(--ff)}
 .project-filter .tag-btn:hover{border-color:var(--text2);color:var(--text)}
 .project-filter .tag-btn.active{background:#fff;color:#0a0a0a;border-color:#fff}
@@ -216,12 +216,17 @@ ul{list-style:none}
 <section class="page" id="page-works">
     <div class="section" style="padding-top:120px">
         <div class="container">
-            <div class="section-header">
+            <div class="project-filter" id="worksFilter">
+                <button class="tag-btn active" data-section="all">全部</button>
+                <button class="tag-btn" data-section="videos">创作视频</button>
+                <button class="tag-btn" data-section="modeling">3D建模</button>
+            </div>
+            <div class="section-header" id="worksVideosSection">
                 <div class="section-tag">Videos</div>
                 <h2 class="section-title">创作视频</h2>
             </div>
             <div class="video-grid" id="worksVideoGrid"></div>
-            <div class="section-header" style="margin-top:60px">
+            <div class="section-header" style="margin-top:60px" id="worksModelingSection">
                 <div class="section-tag">3D Modeling</div>
                 <h2 class="section-title">3D建模</h2>
             </div>
@@ -229,7 +234,6 @@ ul{list-style:none}
             <div class="project-load-more">
                 <button class="tag-btn" id="worksLoadMore" style="padding:8px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;transition:var(--ease);font-family:var(--ff)">加载更多</button>
             </div>
-            <div class="project-filter" id="worksFilter"></div>
         </div>
     </div>
 </section>
@@ -238,6 +242,7 @@ ul{list-style:none}
 <section class="page" id="page-tech">
     <div class="section" style="padding-top:120px">
         <div class="container">
+            <div class="project-filter" id="techFilter"></div>
             <div class="section-header">
                 <div class="section-tag">Videos</div>
                 <h2 class="section-title">技术分享</h2>
@@ -251,7 +256,6 @@ ul{list-style:none}
             <div class="project-load-more">
                 <button class="tag-btn" id="techLoadMore" style="padding:8px 28px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;transition:var(--ease);font-family:var(--ff)">加载更多</button>
             </div>
-            <div class="project-filter" id="techFilter"></div>
         </div>
     </div>
 </section>
@@ -381,26 +385,28 @@ function renderProjects(gridId, loadMoreId, filterId, data) {
         loadMore.style.display = end >= filtered.length ? 'none' : '';
     }
 
-    // Build filter tags
-    const allTags = collectTags();
-    filterEl.innerHTML = '<button class="tag-btn active" data-tag="all">全部</button>';
-    allTags.forEach(t => {
-        const btn = document.createElement('button');
-        btn.className = 'tag-btn';
-        btn.dataset.tag = t;
-        btn.textContent = t;
-        filterEl.appendChild(btn);
-    });
+    // Build filter tags (skip if filter container doesn't exist e.g. works page)
+    if (filterEl) {
+        const allTags = collectTags();
+        filterEl.innerHTML = '<button class="tag-btn active" data-tag="all">全部</button>';
+        allTags.forEach(t => {
+            const btn = document.createElement('button');
+            btn.className = 'tag-btn';
+            btn.dataset.tag = t;
+            btn.textContent = t;
+            filterEl.appendChild(btn);
+        });
 
-    filterEl.addEventListener('click', e => {
-        const btn = e.target.closest('.tag-btn');
-        if (!btn) return;
-        filterEl.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.tag;
-        currentPage = 1;
-        render(1);
-    });
+        filterEl.addEventListener('click', e => {
+            const btn = e.target.closest('.tag-btn');
+            if (!btn) return;
+            filterEl.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.tag;
+            currentPage = 1;
+            render(1);
+        });
+    }
 
     loadMore.addEventListener('click', () => {
         currentPage++;
@@ -507,6 +513,30 @@ function closeExpand() {
 }
 
 /* ================================================
+   Works Section Navigation
+   ================================================ */
+function setupWorksNav() {
+    const filter = document.getElementById('worksFilter');
+    const sections = {
+        all: null,
+        videos: document.getElementById('worksVideosSection'),
+        modeling: document.getElementById('worksModelingSection')
+    };
+    filter.addEventListener('click', e => {
+        const btn = e.target.closest('.tag-btn');
+        if (!btn) return;
+        filter.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = sections[btn.dataset.section];
+        if (!target) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
+
+/* ================================================
    SPA Page Switching
    ================================================ */
 const navLinks = document.querySelectorAll('.nav-link[data-page]');
@@ -532,7 +562,8 @@ function switchPage(pageId) {
     if (pageId === 'works' && !rendered.works) {
         rendered.works = true;
         renderVideos('worksVideoGrid', worksVideos);
-        renderProjects('worksGrid', 'worksLoadMore', 'worksFilter', worksProjects);
+        renderProjects('worksGrid', 'worksLoadMore', null, worksProjects);
+        setupWorksNav();
     }
     if (pageId === 'tech' && !rendered.tech) {
         rendered.tech = true;
