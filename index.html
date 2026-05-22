@@ -290,8 +290,8 @@ const techVideos = [
    Project Data
    ================================================ */
 const worksProjects = [
-    {id:1, cover:'https://picsum.photos/id/1/800/450', title:'品牌视觉识别系统', desc:'完整的品牌视觉体系设计', detail:'为某科技公司打造完整的品牌视觉识别系统，包括 Logo 设计、色彩体系、字体规范、应用延展物料等全链路设计。项目历时 3 个月，最终交付了 60+ 页的品牌手册。', tags:['品牌设计','VI 系统'], bvid:'BV1n1o1BBE13', cat:'brand'},
-    {id:2, cover:'https://picsum.photos/id/26/800/450', title:'移动端 UI 设计', desc:'高质感移动端界面', detail:'一款面向年轻用户的社交 App 界面设计，涵盖首页、个人中心、消息系统等核心模块。注重微交互与动效细节，提升用户体验一致性。', tags:['UI/UX','移动端'], bvid:'BV1n1o1BBE13', cat:'ui'},
+    {id:1, cover:'images/death_stranding.jpg', title:'死亡搁浅风格场景设计', desc:'完整的品牌视觉体系设计', detail:'复刻《死亡搁浅》冥滩美学，以对称构图呈现苔藓湿地、开罗尔BT触手与巨型孤立建筑。通过阴云丁达尔光效与冷灰调色彩，精准还原游戏末世孤寂、神秘诡谲的核心氛围，为Blender写实渲染专项练习。', tags:['3D建模','场景设计'], cat:'3D建模'},
+    {id:2, cover:'images/Classroom_Scene.jpg', title:'三渲二日漫教室场景设计', desc:'高质感移动端界面', detail:'一款面向年轻用户的社交 App 界面设计，涵盖首页、个人中心、消息系统等核心模块。注重微交互与动效细节，提升用户体验一致性。', tags:['UI/UX','移动端'], bvid:'BV1n1o1BBE13', cat:'ui'},
     {id:3, cover:'https://picsum.photos/id/28/800/450', title:'夏日系列插画', desc:'色彩鲜明的创作系列', detail:'以夏日为主题的系列插画作品，融合了水彩与数字绘画技法。该系列在站酷获得了首页推荐，累计阅读量超过 20 万。', tags:['插画','数字绘画'], bvid:'BV1n1o1BBE13', cat:'illustration'},
     {id:4, cover:'https://picsum.photos/id/36/800/450', title:'音乐节海报设计', desc:'充满张力的视觉表达', detail:'为城市音乐节设计的主视觉海报，采用大胆的配色与字体排版，在海报中融入音乐波形元素，传达现场感染力。', tags:['海报','视觉设计'], bvid:'BV1n1o1BBE13', cat:'poster'},
     {id:5, cover:'https://picsum.photos/id/48/800/450', title:'咖啡品牌包装', desc:'从概念到货架', detail:'为精品咖啡品牌打造全套包装体系，从 Logo、包装结构到材质选择，兼顾美学与环保理念。采用可降解材料与极简设计语言。', tags:['品牌设计','包装'], bvid:'BV1n1o1BBE13', cat:'brand'},
@@ -451,9 +451,6 @@ function expandCard(cardEl, project) {
                 <div class="exp-tags">${project.tags.map(t => `<span>${t}</span>`).join('')}</div>
                 <h2 class="exp-title">${project.title}</h2>
                 <p class="exp-desc">${project.detail}</p>
-                <div class="exp-video">
-                    <iframe src="https://bilibili.com/blackboard/html5mobileplayer.html?isOutside=true&bvid=${project.bvid}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy"></iframe>
-                </div>
             </div>
         </div>
     `;
