@@ -433,8 +433,6 @@ let expandState = null;
 function expandCard(cardEl, project) {
     if (expandState) return;
 
-    // Scroll to top of viewport so card position is stable
-    window.scrollTo({ top: 0, behavior: 'instant' });
     const rect = cardEl.getBoundingClientRect();
 
     // Position box at card location
