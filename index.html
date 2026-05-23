@@ -131,8 +131,7 @@ ul{list-style:none}
 .exp-wrap .exp-tags span{font-size:11px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--border);color:var(--text2);padding:4px 12px}
 .exp-wrap .exp-title{font-family:var(--fd);font-size:clamp(22px,3vw,32px);font-weight:700;color:#fff;margin-bottom:12px}
 .exp-wrap .exp-desc{font-size:14px;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:32px}
-.exp-wrap .exp-video{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:4px;overflow:hidden}
-.exp-wrap .exp-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.exp-gallery-img{width:100%;border-radius:6px;margin-bottom:14px;display:block}
 
 /* ===== Footer ===== */
 .footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.06);text-align:center;margin-top:40px}
@@ -194,7 +193,7 @@ ul{list-style:none}
             <div class="about-inner">
                 <div class="about-avatar"><img src="images/homepage_avatar.png" alt="avatar"></div>
                 <div class="about-text">
-                    <h3>以设计为语言</h3>
+                    <h3>个人简介</h3>
                     <p>具备扎实的设计功底与敏锐的艺术审美，熟练掌握 AIGC 工具及 PS/Figma/ 剪映等专业软件，拥有企业采购、项目设计、品牌宣传多维度工作经验，擅长高效执行任务与跨部门协作，学习能力强。</p>
                 </div>
             </div>
@@ -290,33 +289,23 @@ const techVideos = [
    Project Data
    ================================================ */
 const worksProjects = [
-    {id:1, cover:'images/death_stranding.jpg', title:'死亡搁浅风格场景设计', desc:'完整的品牌视觉体系设计', detail:'复刻《死亡搁浅》冥滩美学，以对称构图呈现苔藓湿地、开罗尔BT触手与巨型孤立建筑。通过阴云丁达尔光效与冷灰调色彩，精准还原游戏末世孤寂、神秘诡谲的核心氛围，为Blender写实渲染专项练习。', tags:['3D建模','场景设计'], cat:'3D建模'},
-    {id:2, cover:'images/Classroom_Scene.jpg', title:'三渲二日漫教室场景设计', desc:'高质感移动端界面', detail:'一款面向年轻用户的社交 App 界面设计，涵盖首页、个人中心、消息系统等核心模块。注重微交互与动效细节，提升用户体验一致性。', tags:['UI/UX','移动端'], bvid:'BV1n1o1BBE13', cat:'ui'},
-    {id:3, cover:'https://picsum.photos/id/28/800/450', title:'夏日系列插画', desc:'色彩鲜明的创作系列', detail:'以夏日为主题的系列插画作品，融合了水彩与数字绘画技法。该系列在站酷获得了首页推荐，累计阅读量超过 20 万。', tags:['插画','数字绘画'], bvid:'BV1n1o1BBE13', cat:'illustration'},
-    {id:4, cover:'https://picsum.photos/id/36/800/450', title:'音乐节海报设计', desc:'充满张力的视觉表达', detail:'为城市音乐节设计的主视觉海报，采用大胆的配色与字体排版，在海报中融入音乐波形元素，传达现场感染力。', tags:['海报','视觉设计'], bvid:'BV1n1o1BBE13', cat:'poster'},
-    {id:5, cover:'https://picsum.photos/id/48/800/450', title:'咖啡品牌包装', desc:'从概念到货架', detail:'为精品咖啡品牌打造全套包装体系，从 Logo、包装结构到材质选择，兼顾美学与环保理念。采用可降解材料与极简设计语言。', tags:['品牌设计','包装'], bvid:'BV1n1o1BBE13', cat:'brand'},
-    {id:6, cover:'https://picsum.photos/id/55/800/450', title:'电商 App Redesign', desc:'千万级用户的体验升级', detail:'对一款电商 App 进行全面的界面 redesign，优化了商品浏览路径与购买转化流程，设计系统覆盖 200+ 组件。上线后转化率提升 15%。', tags:['UI/UX','电商'], bvid:'BV1n1o1BBE13', cat:'ui'},
-    {id:7, cover:'https://picsum.photos/id/60/800/450', title:'未来城市概念插画', desc:'赛博朋克风格创作', detail:'以 2080 年的未来城市为背景的概念插画系列，探讨科技与人文的关系。使用 Blender 建模 + Photoshop 后期完成。', tags:['插画','概念设计'], bvid:'BV1n1o1BBE13', cat:'illustration'},
-    {id:8, cover:'https://picsum.photos/id/65/800/450', title:'电影节主视觉', desc:'光影之间的叙事', detail:'为国际短片电影节设计的主视觉系统，包括海报、会场导视、线上宣传图等。以「光影」为核心视觉语言。', tags:['海报','品牌设计'], bvid:'BV1n1o1BBE13', cat:'poster'},
-    {id:9, cover:'https://picsum.photos/id/69/800/450', title:'科技品牌全案', desc:'从命名到落地', detail:'为一家 AI 初创公司提供品牌全案服务，包括品牌命名、Logo 设计、官网界面、PPT 模板、名片等全套物料。', tags:['品牌设计','UI/UX'], bvid:'BV1n1o1BBE13', cat:'brand'},
-    {id:10, cover:'https://picsum.photos/id/80/800/450', title:'数据仪表盘 UI', desc:'复杂数据的可视化', detail:'为企业级 SaaS 产品设计的后台数据仪表盘，将复杂数据通过直观的图表与卡片布局呈现，支持自定义视图与实时更新。', tags:['UI/UX','数据可视化'], bvid:'BV1n1o1BBE13', cat:'ui'},
-    {id:11, cover:'https://picsum.photos/id/86/800/450', title:'水墨风格插画', desc:'传统与现代的融合', detail:'将中国传统水墨技法与数字绘画结合，创作的一系列文化主题插画。用于某文化品牌的节气营销 campaign。', tags:['插画','国风'], bvid:'BV1n1o1BBE13', cat:'illustration'},
-    {id:12, cover:'https://picsum.photos/id/91/800/450', title:'艺术展海报系列', desc:'展览视觉的多样性探索', detail:'为当代艺术展设计的一系列海报，每张海报采用不同的视觉手法但保持统一的识别系统，展现展览的多元性。', tags:['海报','艺术'], bvid:'BV1n1o1BBE13', cat:'poster'}
+    {id:1, cover:'images/death_stranding.jpg', title:'死亡搁浅风格场景设计', desc:'3D写实场景建模', detail:'复刻《死亡搁浅》冥滩美学，以对称构图呈现苔藓湿地、开罗尔BT触手与巨型孤立建筑。通过阴云丁达尔光效与冷灰调色彩，精准还原游戏末世孤寂、神秘诡谲的核心氛围，为Blender写实渲染专项练习。', tags:['场景建模','死亡搁浅'], cat:'3D建模', images:['https://picsum.photos/id/2/800/450','https://picsum.photos/id/3/800/450']},
+    {id:2, cover:'images/Classroom_Scene.jpg', title:'三渲二日漫教室场景设计', desc:'3D二次元场景建模', detail:'还原经典日漫午后教室场景。以侧窗斜射的暖金光影、窗外樱花与空荡课桌椅，营造治愈怀旧的青春氛围感，专项练习卡通材质、体积光与二次元渲染风格把控，为Blender三渲二渲染专项练习。', tags:['场景建模','日漫风','三渲二'], bvid:'BV1n1o1BBE13', cat:'3D建模', images:['https://picsum.photos/id/27/800/450','https://picsum.photos/id/30/800/450']},
 ];
 
 const techProjects = [
-    {id:1, cover:'https://picsum.photos/id/0/800/450', title:'React 组件库', desc:'企业级 UI 组件库', detail:'基于 React + TypeScript 开发的企业级 UI 组件库，包含 50+ 组件，支持主题定制、按需加载、无障碍访问。Storybook 文档覆盖 100%。', tags:['React','TypeScript','组件库'], bvid:'BV1n1o1BBE13', cat:'frontend'},
-    {id:2, cover:'https://picsum.photos/id/20/800/450', title:'Node.js API 架构', desc:'高性能后端服务', detail:'使用 Node.js + Express 构建的 RESTful API 服务，集成 JWT 认证、Redis 缓存、数据库读写分离，QPS 达到 5000+。', tags:['Node.js','后端','API'], bvid:'BV1n1o1BBE13', cat:'backend'},
-    {id:3, cover:'https://picsum.photos/id/42/800/450', title:'AI 图像生成工具', desc:'Stable Diffusion 应用', detail:'基于 Stable Diffusion 开发的图像生成工具，支持文本生图、图生图、局部重绘等功能。使用 Python + Gradio 构建 Web 界面。', tags:['AI','Python','图像生成'], bvid:'BV1n1o1BBE13', cat:'ai'},
-    {id:4, cover:'https://picsum.photos/id/15/800/450', title:'Docker 部署方案', desc:'微服务容器化', detail:'为微服务架构设计的完整 Docker 部署方案，包括 Docker Compose 编排、健康检查、日志收集、自动扩缩容。', tags:['Docker','DevOps','部署'], bvid:'BV1n1o1BBE13', cat:'tool'},
-    {id:5, cover:'https://picsum.photos/id/21/800/450', title:'Vue3 管理后台', desc:'中后台解决方案', detail:'采用 Vue3 + Pinia + Element Plus 构建的管理后台系统，支持动态路由、权限控制、多主题切换，开箱即用。', tags:['Vue3','前端','后台'], bvid:'BV1n1o1BBE13', cat:'frontend'},
-    {id:6, cover:'https://picsum.photos/id/29/800/450', title:'微服务架构设计', desc:'分布式系统实践', detail:'基于 Spring Cloud 设计的微服务架构，包含服务注册与发现、配置中心、网关、熔断降级等完整基础设施。', tags:['微服务','后端','架构'], bvid:'BV1n1o1BBE13', cat:'backend'},
-    {id:7, cover:'https://picsum.photos/id/37/800/450', title:'ML 模型可视化', desc:'机器学习训练监控', detail:'开发的可视化工具，实时展示模型训练过程中的损失曲线、准确率变化、混淆矩阵等指标，帮助快速调优模型。', tags:['AI','可视化','ML'], bvid:'BV1n1o1BBE13', cat:'ai'},
-    {id:8, cover:'https://picsum.photos/id/57/800/450', title:'Git 工作流规范', desc:'团队协作最佳实践', detail:'制定的 Git 分支管理与 Code Review 规范，包括 Git Flow 流程、Commit 规范、自动化 CI/CD 流水线配置。', tags:['Git','DevOps','协作'], bvid:'BV1n1o1BBE13', cat:'tool'},
-    {id:9, cover:'https://picsum.photos/id/61/800/450', title:'TypeScript 工具库', desc:'实用的 TS 工具函数', detail:'开源的 TypeScript 工具函数库，包含类型守卫、日期处理、数据转换等 80+ 实用函数。GitHub 500+ stars。', tags:['TypeScript','开源','工具'], bvid:'BV1n1o1BBE13', cat:'frontend'},
-    {id:10, cover:'https://picsum.photos/id/66/800/450', title:'PostgreSQL 数据库设计', desc:'高性能数据存储方案', detail:'为电商平台设计的 PostgreSQL 数据库架构，包含分表分库策略、索引优化、慢查询分析和读写分离方案。', tags:['数据库','后端','SQL'], bvid:'BV1n1o1BBE13', cat:'backend'},
-    {id:11, cover:'https://picsum.photos/id/82/800/450', title:'神经网络可视化', desc:'深度学习模型图解', detail:'使用 D3.js + Three.js 构建的神经网络结构可视化工具，支持交互式探索网络层、权重和激活值。', tags:['AI','可视化','前端'], bvid:'BV1n1o1BBE13', cat:'ai'},
-    {id:12, cover:'https://picsum.photos/id/93/800/450', title:'CI/CD 流水线', desc:'自动化部署流程', detail:'基于 GitHub Actions + Docker 构建的前端自动化 CI/CD 流水线，包含 lint、test、build、deploy 全流程。', tags:['DevOps','CI/CD','自动化'], bvid:'BV1n1o1BBE13', cat:'tool'}
+    {id:1, cover:'https://picsum.photos/id/0/800/450', title:'React 组件库', desc:'企业级 UI 组件库', detail:'基于 React + TypeScript 开发的企业级 UI 组件库，包含 50+ 组件，支持主题定制、按需加载、无障碍访问。Storybook 文档覆盖 100%。', tags:['React','TypeScript','组件库'], bvid:'BV1n1o1BBE13', cat:'frontend', images:['https://picsum.photos/id/5/800/450','https://picsum.photos/id/6/800/450']},
+    {id:2, cover:'https://picsum.photos/id/20/800/450', title:'Node.js API 架构', desc:'高性能后端服务', detail:'使用 Node.js + Express 构建的 RESTful API 服务，集成 JWT 认证、Redis 缓存、数据库读写分离，QPS 达到 5000+。', tags:['Node.js','后端','API'], bvid:'BV1n1o1BBE13', cat:'backend', images:['https://picsum.photos/id/23/800/450','https://picsum.photos/id/24/800/450']},
+    {id:3, cover:'https://picsum.photos/id/42/800/450', title:'AI 图像生成工具', desc:'Stable Diffusion 应用', detail:'基于 Stable Diffusion 开发的图像生成工具，支持文本生图、图生图、局部重绘等功能。使用 Python + Gradio 构建 Web 界面。', tags:['AI','Python','图像生成'], bvid:'BV1n1o1BBE13', cat:'ai', images:['https://picsum.photos/id/43/800/450','https://picsum.photos/id/44/800/450']},
+    {id:4, cover:'https://picsum.photos/id/15/800/450', title:'Docker 部署方案', desc:'微服务容器化', detail:'为微服务架构设计的完整 Docker 部署方案，包括 Docker Compose 编排、健康检查、日志收集、自动扩缩容。', tags:['Docker','DevOps','部署'], bvid:'BV1n1o1BBE13', cat:'tool', images:['https://picsum.photos/id/16/800/450','https://picsum.photos/id/17/800/450']},
+    {id:5, cover:'https://picsum.photos/id/21/800/450', title:'Vue3 管理后台', desc:'中后台解决方案', detail:'采用 Vue3 + Pinia + Element Plus 构建的管理后台系统，支持动态路由、权限控制、多主题切换，开箱即用。', tags:['Vue3','前端','后台'], bvid:'BV1n1o1BBE13', cat:'frontend', images:['https://picsum.photos/id/22/800/450','https://picsum.photos/id/25/800/450']},
+    {id:6, cover:'https://picsum.photos/id/29/800/450', title:'微服务架构设计', desc:'分布式系统实践', detail:'基于 Spring Cloud 设计的微服务架构，包含服务注册与发现、配置中心、网关、熔断降级等完整基础设施。', tags:['微服务','后端','架构'], bvid:'BV1n1o1BBE13', cat:'backend', images:['https://picsum.photos/id/30/800/450','https://picsum.photos/id/31/800/450']},
+    {id:7, cover:'https://picsum.photos/id/37/800/450', title:'ML 模型可视化', desc:'机器学习训练监控', detail:'开发的可视化工具，实时展示模型训练过程中的损失曲线、准确率变化、混淆矩阵等指标，帮助快速调优模型。', tags:['AI','可视化','ML'], bvid:'BV1n1o1BBE13', cat:'ai', images:['https://picsum.photos/id/38/800/450','https://picsum.photos/id/39/800/450']},
+    {id:8, cover:'https://picsum.photos/id/57/800/450', title:'Git 工作流规范', desc:'团队协作最佳实践', detail:'制定的 Git 分支管理与 Code Review 规范，包括 Git Flow 流程、Commit 规范、自动化 CI/CD 流水线配置。', tags:['Git','DevOps','协作'], bvid:'BV1n1o1BBE13', cat:'tool', images:['https://picsum.photos/id/58/800/450','https://picsum.photos/id/59/800/450']},
+    {id:9, cover:'https://picsum.photos/id/61/800/450', title:'TypeScript 工具库', desc:'实用的 TS 工具函数', detail:'开源的 TypeScript 工具函数库，包含类型守卫、日期处理、数据转换等 80+ 实用函数。GitHub 500+ stars。', tags:['TypeScript','开源','工具'], bvid:'BV1n1o1BBE13', cat:'frontend', images:['https://picsum.photos/id/62/800/450','https://picsum.photos/id/63/800/450']},
+    {id:10, cover:'https://picsum.photos/id/66/800/450', title:'PostgreSQL 数据库设计', desc:'高性能数据存储方案', detail:'为电商平台设计的 PostgreSQL 数据库架构，包含分表分库策略、索引优化、慢查询分析和读写分离方案。', tags:['数据库','后端','SQL'], bvid:'BV1n1o1BBE13', cat:'backend', images:['https://picsum.photos/id/67/800/450','https://picsum.photos/id/68/800/450']},
+    {id:11, cover:'https://picsum.photos/id/82/800/450', title:'神经网络可视化', desc:'深度学习模型图解', detail:'使用 D3.js + Three.js 构建的神经网络结构可视化工具，支持交互式探索网络层、权重和激活值。', tags:['AI','可视化','前端'], bvid:'BV1n1o1BBE13', cat:'ai', images:['https://picsum.photos/id/83/800/450','https://picsum.photos/id/84/800/450']},
+    {id:12, cover:'https://picsum.photos/id/93/800/450', title:'CI/CD 流水线', desc:'自动化部署流程', detail:'基于 GitHub Actions + Docker 构建的前端自动化 CI/CD 流水线，包含 lint、test、build、deploy 全流程。', tags:['DevOps','CI/CD','自动化'], bvid:'BV1n1o1BBE13', cat:'tool', images:['https://picsum.photos/id/94/800/450','https://picsum.photos/id/95/800/450']}
 ];
 
 /* ================================================
@@ -449,6 +438,8 @@ function expandCard(cardEl, project) {
                 <div class="exp-tags">${project.tags.map(t => `<span>${t}</span>`).join('')}</div>
                 <h2 class="exp-title">${project.title}</h2>
                 <p class="exp-desc">${project.detail}</p>
+                ${project.images ? project.images.map(src => `
+                <img class="exp-gallery-img" src="${src}" alt="${project.title}" loading="lazy">`).join('') : ''}
             </div>
         </div>
     `;
